@@ -26,9 +26,11 @@ modules:
     install:
       # - micro
       # - starship
+      - iwd
     remove:
       - firefox # default firefox removed in favor of flatpak
       - firefox-langpacks # langpacks needs to also be removed to prevent dependency problems
+      - wpa_supplicant # removed in favor of iwd
 
   - type: bling # configure what to pull in from ublue-os/bling
     install:
@@ -59,3 +61,16 @@ modules:
     scripts:
       # this sets up the proper policy & signing files for signed images to work
       - signing.sh
+      
+  - type: default-flatpaks
+  system:
+  # If no repo information is specified, Flathub will be used by default
+    repo-url: https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
+    repo-name: flathub
+    repo-title: "Flathub" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
+    install:
+      - org.gnome.Loupe
+    remove:
+      - org.gnome.eog
+  # A flatpak repo can also be added without having to install flatpaks,
+  # as long as one of the repo- fields is present
